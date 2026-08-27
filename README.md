@@ -11,6 +11,7 @@
 - 自动选择 CUDA GPU 或 CPU；
 - 使用 `conf=0.35`、`iou=0.50` 作为基线参数；
 - 将带类别、置信度和检测框的结果保存为视频；
+- 将每个检测框的帧号、类别、置信度和坐标导出为 CSV；
 - 输出处理帧数和结果路径，并为输入缺失等情况提供中文提示。
 
 本阶段不包含目标跟踪、卡尔曼滤波、多源融合、模型训练或前端界面。
@@ -58,6 +59,16 @@ python main.py
 ```text
 outputs/videos/test_detected.mp4
 ```
+
+逐帧检测结果保存到：
+
+```text
+outputs/csv/test_detections.csv
+```
+
+CSV 每个检测框占一行，字段为 `frame_number`、`class_id`、`class_name`、
+`confidence`、`x1`、`y1`、`x2`、`y2`。帧号从 1 开始，框坐标采用像素单位的
+左上角 `(x1, y1)` 和右下角 `(x2, y2)`。
 
 实验记录模板位于 `outputs/logs/experiment_01.md`，图像类结果可放入 `outputs/images/`。
 
