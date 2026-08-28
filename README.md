@@ -12,6 +12,7 @@
 - 使用 `conf=0.35`、`iou=0.50` 作为基线参数；
 - 将带类别、置信度和检测框的结果保存为视频；
 - 将每个检测框的帧号、类别、置信度和坐标导出为 CSV；
+- 检测配置和视频处理逻辑封装在 `src/detection/` 模块中；
 - 输出处理帧数和结果路径，并为输入缺失等情况提供中文提示。
 
 本阶段不包含目标跟踪、卡尔曼滤波、多源融合、模型训练或前端界面。
@@ -52,31 +53,49 @@ data/videos/test.mp4
 python main.py
 ```
 
+可通过命令行设置输入、检测阈值和输出路径：
+
+```bash
+python main.py --input data/videos/test.mp4 --conf 0.35 --iou 0.50
+python main.py --conf 0.20 --output-video outputs/videos/custom.mp4 --output-csv outputs/csv/custom.csv
+```
+
+执行 `python main.py --help` 可查看全部参数。未指定输出路径时，程序会将参数写入
+文件名，例如 `test_detected_conf_0.35_iou_0.50.mp4`，避免不同实验互相覆盖。
+
 ## 输出位置
 
 检测结果视频保存到：
 
 ```text
-outputs/videos/test_detected.mp4
+outputs/videos/test_detected_conf_0.35_iou_0.50.mp4
 ```
 
 逐帧检测结果保存到：
 
 ```text
-outputs/csv/test_detections.csv
+outputs/csv/test_detections_conf_0.35_iou_0.50.csv
 ```
 
 CSV 每个检测框占一行，字段为 `frame_number`、`class_id`、`class_name`、
 `confidence`、`x1`、`y1`、`x2`、`y2`。帧号从 1 开始，框坐标采用像素单位的
 左上角 `(x1, y1)` 和右下角 `(x2, y2)`。
 
+## 代码结构
+
+- `main.py`：解析命令行参数、组织输入输出路径并展示运行状态；
+- `src/detection/models.py`：定义检测框和帧级检测结果等共享数据结构；
+- `src/detection/video_detector.py`：加载模型、选择设备、逐帧检测并写出视频和 CSV；
+- `src/detection/__init__.py`：提供检测配置、运行摘要和检测函数的统一导入入口。
+- `src/tracking/contracts.py`：定义后续跟踪器名称和轨迹 CSV 字段契约；
+- `docs/tracking_preparation.md`：记录跟踪接入策略、输出格式和验收标准。
+
 实验记录模板位于 `outputs/logs/experiment_01.md`，图像类结果可放入 `outputs/images/`。
 
 ## 后续开发计划
 
-1. 在不同置信度阈值下评估检测效果并记录实验结果；
-2. 封装检测模块和配置加载逻辑；
-3. 增加多目标跟踪及轨迹管理；
-4. 引入卡尔曼滤波并分析速度、方向等运动状态；
-5. 扩展到多视频或多传感器信息融合；
-6. 根据需要开发可视化前端和评估工具。
+1. 人工核验三组置信度实验，确认后续使用的检测基线；
+2. 增加多目标跟踪及轨迹管理；
+3. 引入卡尔曼滤波并分析速度、方向等运动状态；
+4. 扩展到多视频或多传感器信息融合；
+5. 根据需要开发可视化前端和评估工具。
