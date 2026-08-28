@@ -1,0 +1,33 @@
+# Python 缓存
+__pycache__/
+*.py[cod]
+
+# 本地虚拟环境
+.venv/
+venv/
+
+# 测试视频和其他原始视频
+data/videos/*
+!data/videos/.gitkeep
+
+# 模型权重
+*.pt
+*.pth
+*.onnx
+*.engine
+
+# 生成结果
+outputs/videos/*
+outputs/csv/*
+outputs/images/*
+
+# 保留空目录占位文件
+!outputs/videos/.gitkeep
+!outputs/csv/.gitkeep
+!outputs/images/.gitkeep
+
+# 编辑器和系统文件
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
