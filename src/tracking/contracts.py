@@ -3,7 +3,7 @@
 from typing import Final
 
 
-DEFAULT_TRACKER_CONFIG: Final[str] = "bytetrack.yaml"
+DEFAULT_TRACKER_CONFIG: Final[str] = "iou"
 TRACK_CSV_FIELDS: Final[tuple[str, ...]] = (
     "frame_number",
     "timestamp_seconds",

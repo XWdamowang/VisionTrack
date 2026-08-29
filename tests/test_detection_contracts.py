@@ -46,7 +46,7 @@ class DetectionContractTests(unittest.TestCase):
             DetectionConfig(confidence_threshold=1.01)
 
     def test_tracking_output_contract_is_stable(self) -> None:
-        self.assertEqual(DEFAULT_TRACKER_CONFIG, "bytetrack.yaml")
+        self.assertEqual(DEFAULT_TRACKER_CONFIG, "iou")
         self.assertEqual(
             TRACK_CSV_FIELDS,
             (
