@@ -1,4 +1,4 @@
-"""在逐帧检测结果上运行 IoU 跟踪并导出结果。"""
+"""在逐帧检测结果上运行 IoU 跟踪实验并导出结果。"""
 
 import csv
 from contextlib import closing

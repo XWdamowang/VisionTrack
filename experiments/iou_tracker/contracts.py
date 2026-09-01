@@ -1,4 +1,4 @@
-"""多目标跟踪阶段预先约定的公共契约。"""
+"""IoU Tracker 学习实验的输出契约。"""
 
 from typing import Final
 

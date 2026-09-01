@@ -1,4 +1,4 @@
-"""轻量 IoU 目标跟踪模块。"""
+"""轻量 IoU 目标跟踪学习实验。"""
 
 from .contracts import DEFAULT_TRACKER_CONFIG, TRACK_CSV_FIELDS
 from .iou_tracker import (

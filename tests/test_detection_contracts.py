@@ -1,11 +1,10 @@
-"""检测与跟踪接入契约的单元测试。"""
+"""检测模块公共契约的单元测试。"""
 
 import unittest
 
 import numpy as np
 
 from src.detection import Detection, DetectionConfig, FrameDetections
-from src.tracking import DEFAULT_TRACKER_CONFIG, TRACK_CSV_FIELDS
 
 
 class DetectionContractTests(unittest.TestCase):
@@ -44,25 +43,6 @@ class DetectionContractTests(unittest.TestCase):
     def test_invalid_detection_threshold_is_rejected(self) -> None:
         with self.assertRaisesRegex(ValueError, "置信度阈值"):
             DetectionConfig(confidence_threshold=1.01)
-
-    def test_tracking_output_contract_is_stable(self) -> None:
-        self.assertEqual(DEFAULT_TRACKER_CONFIG, "iou")
-        self.assertEqual(
-            TRACK_CSV_FIELDS,
-            (
-                "frame_number",
-                "timestamp_seconds",
-                "track_id",
-                "class_id",
-                "class_name",
-                "confidence",
-                "x1",
-                "y1",
-                "x2",
-                "y2",
-            ),
-        )
-
 
 if __name__ == "__main__":
     unittest.main()

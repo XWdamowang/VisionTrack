@@ -1,4 +1,4 @@
-# 轻量 IoU 多目标跟踪
+# 轻量 IoU 多目标跟踪实验记录
 
 ## 当前边界
 
@@ -41,15 +41,15 @@ with closing(iter_video_detections(input_path, detector)) as frames:
 - 只关联相同检测类别，并按 IoU 从高到低进行一对一匹配；
 - 首轮保留全部检测类别，不预先缩小目标范围；
 - 跟踪视频与轨迹 CSV 单独保存，不覆盖检测阶段结果；
-- 跟踪算法封装在 `src/tracking/` 中，不反向侵入检测模块。
+- 跟踪算法封装在 `experiments/iou_tracker/` 中，只依赖正式检测接口。
 
-真实视频入口为 `python track.py`。无需模型推理的典型场景演示入口为
-`python demo_iou_tracker.py`。
+真实视频入口为 `python -m experiments.iou_tracker.run_video`。无需模型推理的
+典型场景演示入口为 `python -m experiments.iou_tracker.run_scenarios`。
 
 ## 跟踪输出契约
 
 轨迹 CSV 保存到 `outputs/csv/test_tracks_*.csv`，每行表示一帧中的一个已跟踪目标，
-字段顺序由 `src.tracking.TRACK_CSV_FIELDS` 统一定义：
+字段顺序由 `experiments.iou_tracker.TRACK_CSV_FIELDS` 统一定义：
 
 ```text
 frame_number,timestamp_seconds,track_id,class_id,class_name,

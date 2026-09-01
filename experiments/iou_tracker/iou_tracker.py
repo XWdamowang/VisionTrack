@@ -1,4 +1,4 @@
-"""仅使用边界框 IoU 的轻量多目标跟踪器。"""
+"""仅使用边界框 IoU 的轻量多目标跟踪学习实现。"""
 
 from dataclasses import dataclass
 

@@ -20,11 +20,13 @@ data/videos/*
 outputs/videos/*
 outputs/csv/*
 outputs/images/*
+outputs/tracking/*
 
 # 保留空目录占位文件
 !outputs/videos/.gitkeep
 !outputs/csv/.gitkeep
 !outputs/images/.gitkeep
+!outputs/tracking/.gitkeep
 
 # 编辑器和系统文件
 .vscode/

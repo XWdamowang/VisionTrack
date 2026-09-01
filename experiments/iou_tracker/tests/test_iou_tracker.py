@@ -3,7 +3,13 @@
 import unittest
 
 from src.detection import Detection
-from src.tracking import IouTracker, IouTrackerConfig, calculate_iou
+from experiments.iou_tracker import (
+    DEFAULT_TRACKER_CONFIG,
+    TRACK_CSV_FIELDS,
+    IouTracker,
+    IouTrackerConfig,
+    calculate_iou,
+)
 
 
 def make_detection(x1: float, x2: float, class_id: int = 0) -> Detection:
@@ -11,6 +17,24 @@ def make_detection(x1: float, x2: float, class_id: int = 0) -> Detection:
 
 
 class IouTrackerTests(unittest.TestCase):
+    def test_tracking_output_contract_is_stable(self) -> None:
+        self.assertEqual(DEFAULT_TRACKER_CONFIG, "iou")
+        self.assertEqual(
+            TRACK_CSV_FIELDS,
+            (
+                "frame_number",
+                "timestamp_seconds",
+                "track_id",
+                "class_id",
+                "class_name",
+                "confidence",
+                "x1",
+                "y1",
+                "x2",
+                "y2",
+            ),
+        )
+
     def test_iou_value(self) -> None:
         self.assertAlmostEqual(
             calculate_iou((0.0, 0.0, 10.0, 10.0), (5.0, 0.0, 15.0, 10.0)),
