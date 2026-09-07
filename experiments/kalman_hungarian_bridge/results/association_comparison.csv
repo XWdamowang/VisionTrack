@@ -1,0 +1,25 @@
+﻿scenario,track_id,detection_id,last_bbox_iou,predicted_bbox_iou,last_bbox_match_valid,kalman_match_valid
+正常匀速,1,101,0.333333,1.000000,True,True
+正常匀速,1,102,0.000000,0.000000,False,False
+正常匀速,2,101,0.000000,0.000000,False,False
+正常匀速,2,102,0.428571,1.000000,True,True
+两目标交叉,1,101,0.000000,1.000000,False,True
+两目标交叉,1,102,0.333333,0.000000,True,False
+两目标交叉,2,101,0.333333,0.000000,True,False
+两目标交叉,2,102,0.000000,1.000000,False,True
+漏检1帧,1,101,0.000000,1.000000,False,True
+漏检1帧,1,102,0.000000,0.000000,False,False
+漏检1帧,2,101,0.000000,0.000000,False,False
+漏检1帧,2,102,0.000000,1.000000,False,True
+漏检3帧,1,101,0.000000,1.000000,False,True
+漏检3帧,1,102,0.000000,0.000000,False,False
+漏检3帧,2,101,0.000000,0.000000,False,False
+漏检3帧,2,102,0.000000,1.000000,False,True
+高速运动导致gating拒绝,1,101,0.000000,0.000000,False,False
+高速运动导致gating拒绝,1,102,0.000000,0.000000,False,False
+高速运动导致gating拒绝,2,101,0.000000,0.000000,False,False
+高速运动导致gating拒绝,2,102,1.000000,1.000000,True,True
+last bbox失败但Kalman成功,1,101,0.111111,1.000000,False,True
+last bbox失败但Kalman成功,1,102,0.000000,0.000000,False,False
+last bbox失败但Kalman成功,2,101,0.000000,0.000000,False,False
+last bbox失败但Kalman成功,2,102,1.000000,1.000000,True,True

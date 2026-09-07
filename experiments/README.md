@@ -11,3 +11,4 @@
 - `iou_tracker/`：IoU Tracker、真实视频入口、典型场景演示及其测试；
 - `kalman_cv_2d/`：状态为 `[x, y, vx, vy]` 的二维匀速卡尔曼滤波实验。
 - `hungarian_assignment/`：IoU 代价矩阵、Hungarian 全局分配和 IoU gating 实验。
+- `kalman_hungarian_bridge/`：last bbox 与 Kalman predicted bbox 的双路 Hungarian 关联对照。
