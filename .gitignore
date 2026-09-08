@@ -3,8 +3,8 @@ __pycache__/
 *.py[cod]
 
 # 本地虚拟环境
-.venv/
-venv/
+.visual_analysis/
+visual_analysis/
 
 # 测试视频和其他原始视频
 data/videos/*

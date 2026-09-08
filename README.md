@@ -30,13 +30,13 @@
 建议使用 Python 3.10 或更高版本，并在虚拟环境中安装依赖：
 
 ```bash
-python -m venv .venv
+python -m venv visual_analysis
 ```
 
 Windows PowerShell 激活虚拟环境：
 
 ```powershell
-.\.venv\Scripts\Activate.ps1
+.\visual_analysis\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
