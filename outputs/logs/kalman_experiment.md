@@ -2,8 +2,8 @@
 
 ## 数据与参数
 
-- IoU Tracker 输出：`E:\Projects\VisionTrack\outputs\csv\test_track_iou_0.50_miss_2.csv`
-- 源视频：`E:\Projects\VisionTrack\data\videos\test.mp4`
+- IoU Tracker 输出：`/home/wzk/Projects/VisionTrack/outputs/csv/test_track_iou_0.50_miss_2.csv`
+- 源视频：`/home/wzk/Projects/VisionTrack/data/videos/test.mp4`
 - 使用的 track_id：`80`
 - 连续轨迹范围：第 325–466 帧，共 142 帧
 - FPS：`29.970030`

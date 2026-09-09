@@ -9,6 +9,7 @@ import cv2
 import numpy as np
 
 from src.detection import BBoxXYXY, Detection, ImageArray
+from src.utils.video_writer import create_video_writer
 from experiments.iou_tracker import IouTracker, IouTrackerConfig
 
 
@@ -89,10 +90,7 @@ def main() -> int:
     OUTPUT_VIDEO.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_IMAGE.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_CSV.parent.mkdir(parents=True, exist_ok=True)
-    writer = cv2.VideoWriter(str(OUTPUT_VIDEO), cv2.VideoWriter_fourcc(*"mp4v"), FPS, FRAME_SIZE)
-    if not writer.isOpened():
-        print(f"生成失败：无法创建演示视频：{OUTPUT_VIDEO}")
-        return 1
+    writer = create_video_writer(OUTPUT_VIDEO, FPS, FRAME_SIZE)
 
     scenarios = (
         ("1. Short occlusion", _occlusion_frame),

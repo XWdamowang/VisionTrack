@@ -71,6 +71,12 @@ python main.py --conf 0.20 --output-video outputs/videos/custom.mp4 --output-csv
 执行 `python main.py --help` 可查看全部参数。未指定输出路径时，程序会将参数写入
 文件名，例如 `test_detected_conf_0.35_iou_0.50.mp4`，避免不同实验互相覆盖。
 
+批量运行 `conf=0.20`、`0.35`、`0.60` 的检测阈值对比实验：
+
+```bash
+python -m experiments.detection_thresholds.run_experiment
+```
+
 运行真实视频的 IoU 跟踪实验：
 
 ```bash
@@ -127,6 +133,7 @@ CSV 每个检测框占一行，字段为 `frame_number`、`class_id`、`class_na
 - `src/detection/models.py`：定义检测框和帧级检测结果等共享数据结构；
 - `src/detection/video_detector.py`：加载模型、选择设备、逐帧检测并写出视频和 CSV；
 - `src/detection/__init__.py`：提供检测配置、运行摘要和检测函数的统一导入入口。
+- `experiments/detection_thresholds/`：多组 YOLO 检测置信度阈值对比实验；
 - `experiments/iou_tracker/`：IoU 算法、真实视频入口、场景演示、契约和测试；
 - `experiments/kalman_cv_2d/`：二维匀速卡尔曼实现、实验入口、说明和测试；
 - `experiments/hungarian_assignment/`：IoU 代价矩阵、Hungarian 分配、门控和测试；

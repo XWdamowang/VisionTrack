@@ -12,6 +12,7 @@ from src.detection import (
     VideoDetector,
     iter_video_detections,
 )
+from src.utils.video_writer import H264VideoWriter, create_video_writer
 
 from .contracts import TRACK_CSV_FIELDS
 from .iou_tracker import IouTracker, IouTrackerConfig, TrackedDetection
@@ -72,15 +73,13 @@ def run_video_tracking(
     tracker_config: IouTrackerConfig,
 ) -> TrackingSummary:
     """检测并跟踪单个视频，保存带 ID 的视频和轨迹 CSV。"""
-    import cv2
-
     detector = VideoDetector(detection_config)
     tracker = IouTracker(tracker_config)
     output_video_path.parent.mkdir(parents=True, exist_ok=True)
     output_csv_path.parent.mkdir(parents=True, exist_ok=True)
 
     csv_file: TextIO | None = None
-    video_writer = None
+    video_writer: H264VideoWriter | None = None
     processed_frames = 0
     observed_track_ids: set[int] = set()
     try:
@@ -97,14 +96,11 @@ def run_video_tracking(
                 annotated_frame = draw_tracks(frame_result.frame, tracks)
                 if video_writer is None:
                     height, width = annotated_frame.shape[:2]
-                    video_writer = cv2.VideoWriter(
-                        str(output_video_path),
-                        cv2.VideoWriter_fourcc(*"mp4v"),
+                    video_writer = create_video_writer(
+                        output_video_path,
                         frame_result.source_fps,
                         (width, height),
                     )
-                    if not video_writer.isOpened():
-                        raise RuntimeError(f"无法创建跟踪视频：{output_video_path}")
 
                 video_writer.write(annotated_frame)
                 processed_frames = frame_result.frame_number

@@ -7,6 +7,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Final, TextIO
 
+from src.utils.video_writer import H264VideoWriter, create_video_writer
+
 from .models import Detection, FrameDetections, ImageArray
 
 
@@ -151,14 +153,12 @@ def run_video_detection(
     config: DetectionConfig,
 ) -> DetectionSummary:
     """消费帧级检测接口，并保存可视化视频和检测结果 CSV。"""
-    import cv2
-
     detector = VideoDetector(config)
     output_video_path.parent.mkdir(parents=True, exist_ok=True)
     output_csv_path.parent.mkdir(parents=True, exist_ok=True)
 
     csv_file: TextIO | None = None
-    writer = None
+    writer: H264VideoWriter | None = None
     processed_frames = 0
     try:
         try:
@@ -179,16 +179,11 @@ def run_video_detection(
             for frame_result in frames:
                 if writer is None:
                     height, width = frame_result.annotated_frame.shape[:2]
-                    writer = cv2.VideoWriter(
-                        str(output_video_path),
-                        cv2.VideoWriter_fourcc(*"mp4v"),
+                    writer = create_video_writer(
+                        output_video_path,
                         frame_result.source_fps,
                         (width, height),
                     )
-                    if not writer.isOpened():
-                        raise RuntimeError(
-                            f"无法创建输出视频：{output_video_path}"
-                        )
 
                 writer.write(frame_result.annotated_frame)
                 processed_frames = frame_result.frame_number
