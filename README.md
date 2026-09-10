@@ -16,6 +16,7 @@
 - 输出处理帧数和结果路径，并为输入缺失等情况提供中文提示；
 - 在实验区通过逐帧 IoU 贪心关联生成轨迹 ID，可设置关联阈值和最大丢失帧数；
 - 在实验区提供遮挡、交叉和高速运动的合成演示，不需要下载额外视频。
+- 在实验区提供复用 Kalman、IoU、Hungarian 和 gating 的简化 SORT，实现完整轨迹生命周期。
 
 正式工程当前不包含目标跟踪、卡尔曼滤波、外观特征、多源融合、模型训练或前端界面。
 
@@ -109,6 +110,13 @@ python -m experiments.kalman_cv_2d.run_experiment
 python -m experiments.hungarian_assignment.run_experiment
 ```
 
+运行简化 SORT 生命周期实验与测试：
+
+```bash
+python -m experiments.sort_tracker.run_experiment
+python -m unittest discover -s experiments/sort_tracker/tests -v
+```
+
 ## 输出位置
 
 检测结果视频保存到：
@@ -137,6 +145,7 @@ CSV 每个检测框占一行，字段为 `frame_number`、`class_id`、`class_na
 - `experiments/iou_tracker/`：IoU 算法、真实视频入口、场景演示、契约和测试；
 - `experiments/kalman_cv_2d/`：二维匀速卡尔曼实现、实验入口、说明和测试；
 - `experiments/hungarian_assignment/`：IoU 代价矩阵、Hungarian 分配、门控和测试；
+- `experiments/sort_tracker/`：简化 SORT 跟踪器、生命周期实验和测试；
 - `track.py`、`demo_iou_tracker.py`、`kalman_experiment.py`：兼容旧命令的转发入口。
 
 实验记录模板位于 `outputs/logs/experiment_01.md`，图像类结果可放入 `outputs/images/`。
